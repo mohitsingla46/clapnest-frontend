@@ -9,7 +9,7 @@ import { AppService } from 'src/app/core/services/app.services';
 @Component({
 	selector: 'app-signup',
 	standalone: true,
-	imports: [FormsModule, ReactiveFormsModule, NgIf, NgFor, RouterLink],
+	imports: [FormsModule, ReactiveFormsModule, NgIf, RouterLink],
 	templateUrl: './signup.component.html',
 	styleUrl: './signup.component.css'
 })
@@ -17,20 +17,16 @@ export class SignupComponent implements OnInit {
 	appName: string = environment.appName;
 	signupForm!: FormGroup;
 	errorMessage: string | null = null;
-	roles: any;
 
 	router = inject(Router);
 	toastr = inject(ToastrService);
 	appService = inject(AppService);
 
 	ngOnInit(): void {
-		this.fetchRoles();
-
 		this.signupForm = new FormGroup({
 			name: new FormControl('', Validators.required),
 			email: new FormControl('', [Validators.required, Validators.email]),
 			password: new FormControl('', Validators.required),
-			role: new FormControl('', Validators.required),
 		});
 	}
 
@@ -38,8 +34,7 @@ export class SignupComponent implements OnInit {
 		const user = {
 			name: this.signupForm.get('name')?.value,
 			email: this.signupForm.get('email')?.value,
-			password: this.signupForm.get('password')?.value,
-			role: this.signupForm.get('role')?.value
+			password: this.signupForm.get('password')?.value
 		};
 
 		this.appService.signup(user).subscribe({
@@ -56,17 +51,6 @@ export class SignupComponent implements OnInit {
 				} else {
 					this.toastr.error('Something went wrong at our end. Please try again later.', 'Error');
 				}
-			},
-		});
-	}
-
-	fetchRoles() {
-		this.appService.roles().subscribe({
-			next: (data) => {
-				this.roles = data;
-			},
-			error: (error) => {
-				console.error('Error fetching roles:', error);
 			},
 		});
 	}

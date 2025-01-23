@@ -1,30 +1,15 @@
 import { gql } from "apollo-angular";
 
-export const GET_ROLES = gql`
-  query {
-    getRoles {
-      id,
-      name
-    }
-  }
-`;
-
 export const SIGNUP_MUTATION = gql`
-  mutation signup($name: String!, $email: String!, $password: String!, $role: String!) {
+  mutation signup($name: String!, $email: String!, $password: String!) {
     signup(input: {
       name: $name,
       email: $email,
-      password: $password,
-      role: $role,
+      password: $password
     }) {
       id
       name
       email
-      password
-      role {
-        id,
-        name
-      }
     }
   }
 `;
@@ -40,9 +25,6 @@ export const LOGIN_MUTATION = gql`
         id
         name
         email
-        role {
-          name
-        }
       }
     }
   }
@@ -64,10 +46,6 @@ export const GET_USER_DETAIL = gql`
       id
       name
       email
-      role {
-        id
-        name
-      }
     }
   }
 `;
@@ -105,10 +83,7 @@ export const GET_PROFILE = gql`
     getprofile {
       id
       name,
-      email,
-      role {
-        name
-      }
+      email
     }
   }
 `;

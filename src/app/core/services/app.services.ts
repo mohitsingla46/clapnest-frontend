@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { Apollo } from "apollo-angular";
 import { catchError, map, Observable, of } from "rxjs";
-import { GET_CHAT_HISTORY, GET_USER_DETAIL, GET_CHAT_USERS, GET_CHATS, GET_PROFILE, GET_ROLES, LOGIN_MUTATION, SIGNUP_MUTATION } from "src/app/graphql/graphql-queries";
+import { GET_CHAT_HISTORY, GET_USER_DETAIL, GET_CHAT_USERS, GET_CHATS, GET_PROFILE, LOGIN_MUTATION, SIGNUP_MUTATION } from "src/app/graphql/graphql-queries";
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +11,7 @@ export class AppService {
   http = inject(HttpClient);
   apollo = inject(Apollo);
 
-  roles(): Observable<any> {
-    return this.apollo.watchQuery({
-      query: GET_ROLES,
-    }).valueChanges.pipe(
-      map((result: any) => result.data.getRoles)
-    );;
-  }
-
-  signup(user: { name: string, email: string, password: string, role: string }): Observable<any> {
+  signup(user: { name: string, email: string, password: string }): Observable<any> {
     return this.apollo.mutate({
       mutation: SIGNUP_MUTATION,
       variables: user,
