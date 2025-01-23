@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { SocketService } from './core/services/socket.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,13 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'clapnest';
+export class AppComponent implements OnInit, OnDestroy {
+  // constructor(private socketService: SocketService) { }
+
+  public ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    // this.socketService.disconnect();
+  }
 }

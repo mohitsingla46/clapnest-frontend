@@ -1,0 +1,22 @@
+<div class="flex justify-between bg-gray-800 text-white items-center p-4">
+	<h5 class="text-lg font-semibold text-white">ClapNest</h5>
+	<!-- Three-dot options menu -->
+	<div class="relative" #menuRef>
+		<button class="text-white" (click)="toggleMenu()">
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+				stroke="currentColor" class="w-6 h-6">
+				<path stroke-linecap="round" stroke-linejoin="round"
+					d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12a.75.75 0 110-1.5.75.75 0 010 1.5zM12 17.25a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+			</svg>
+		</button>
+		<div *ngIf="isMenuOpen"
+			class="absolute right-0 mt-2 w-40 bg-white text-black rounded-md shadow-lg z-10 overflow-hidden transition-all duration-500 ease-in-out"
+			[style.maxHeight]="isMenuOpen ? '300px' : '0'" [style.opacity]="isMenuOpen ? '1' : '0'">
+			<ul class="py-2">
+				<li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" (click)="navigateTo('profile')">Profile</li>
+				<li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" (click)="navigateTo('settings')">Settings</li>
+				<li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" (click)="handleLogout()">Logout</li>
+			</ul>
+		</div>
+	</div>
+</div>

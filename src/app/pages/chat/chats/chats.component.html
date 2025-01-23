@@ -1,0 +1,35 @@
+<div class="min-h-screen md:flex md:justify-center md:items-center md:mt-2">
+	<div class="w-full h-screen md:h-[80vh] md:max-w-md bg-white md:rounded-lg md:shadow-lg relative overflow-y-auto">
+		<app-header></app-header>
+
+		<div class="divide-y divide-gray-200">
+			<ng-container *ngIf="chats.length > 0; else noChats">
+				<a *ngFor="let chat of chats" [routerLink]="['/chat/detail/', chat.user.id]"
+					class="flex items-center p-4 hover:bg-gray-100">
+					<img src="https://placehold.co/50" alt="User" class="rounded-full w-12 h-12 object-cover" />
+					<div class="ml-4 flex-grow">
+						<h6 class="text-base font-medium text-gray-800">{{ chat.user.name }}</h6>
+						<small class="text-sm text-gray-500">{{ chat.lastMessage }}</small>
+					</div>
+					<small class="text-sm text-gray-500">{{ chat.lastMessageTime }}</small>
+				</a>
+			</ng-container>
+			<ng-template #noChats>
+				<div class="p-4 text-center">
+					<p class="text-gray-500">No chats here. Start a new conversation!</p>
+				</div>
+			</ng-template>
+		</div>
+
+		<div class="fixed md:absolute bottom-6 right-6">
+			<a routerLink="/chat/new">
+				<button class="bg-blue-500 text-white rounded-full p-4 shadow-lg hover:bg-blue-600 transition">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+						stroke="currentColor" class="w-6 h-6">
+						<path strokeLinecap="round" strokeLinejoin="round" d="M12 5.25v13.5m7.5-7.5h-15" />
+					</svg>
+				</button>
+			</a>
+		</div>
+	</div>
+</div>
